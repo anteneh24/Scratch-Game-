@@ -1,0 +1,10 @@
+
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÅÏã8 ªáƒ‚2
+r	java:S1170"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”µ´Áøÿÿÿÿ8¡ªáƒ‚2
+x	java:S116"\Rename this field "reward_multiplier" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³•žø8ƒŠàƒ‚2
+y	java:S116
+"XRename this field "covered_areas" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îˆ˜ïüÿÿÿÿ8§ªáƒ‚2
+i	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û¥¶c8ªªáƒ‚2
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÅÏã8ªªáƒ‚2
+j	java:S100,"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ð±³³8®ªáƒ‚2
+o	java:S1000"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”µ´Áøÿÿÿÿ8¯ªáƒ‚2
