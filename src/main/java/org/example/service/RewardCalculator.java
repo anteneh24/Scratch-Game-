@@ -38,6 +38,10 @@ public class RewardCalculator {
                 }
         }
 
+        // Check for linear patterns
+        checkLinearPatterns();
+
+        // Apply bonus symbols
         applyBonusSymbols();
         return reward;
     }
@@ -55,32 +59,58 @@ public class RewardCalculator {
     }
 
     private void applyBonusSymbols() {
-        Random random = new Random();
         Map<String, Integer> bonusSymbols = config.getProbabilities().bonus_symbols.getSymbols();
-        int totalWeight = bonusSymbols.values().stream().mapToInt(Integer::intValue).sum();
-        int randomValue = random.nextInt(totalWeight);
-        int currentWeight = 0;
-
-        for (Map.Entry<String, Integer> entry : bonusSymbols.entrySet()) {
-            currentWeight += entry.getValue();
-            if (randomValue < currentWeight) {
-                String bonusSymbol = entry.getKey();
-                appliedBonusSymbol = bonusSymbol;
-                switch (config.getSymbols().get(bonusSymbol).impact) {
-                    case "multiply_reward":
-                        reward *= config.getSymbols().get(bonusSymbol).reward_multiplier;
-                        break;
-                    case "extra_bonus":
-                        reward += config.getSymbols().get(bonusSymbol).extra;
-                        break;
-                    case "miss":
-                        // Do nothing
-                        break;
+        if (reward > 0)
+            for (String[] row : matrix) {
+                for (String symbol : row) {
+                    if (bonusSymbols.containsKey(symbol)) {
+                        appliedBonusSymbol = symbol;
+                        switch (config.getSymbols().get(symbol).getImpact()) {
+                            case "multiply_reward":
+                                reward *= config.getSymbols().get(symbol).getReward_multiplier();
+                                break;
+                            case "extra_bonus":
+                                reward += config.getSymbols().get(symbol).getExtra();
+                                break;
+                            case "miss":
+                                // Do nothing
+                                break;
+                        }
+                    }
                 }
-                break;
+            }
+    }
+
+    private void checkLinearPatterns() {
+        for (Map.Entry<String, WinningCombination> winEntry : config.getWinCombinations().entrySet()) {
+            WinningCombination winCombination = winEntry.getValue();
+            if ("linear_symbols".equals(winCombination.getWhen())) {
+                for (List<String> coveredArea : winCombination.getCovered_areas()) {
+                    if (isWinningPattern(coveredArea)) {
+                        String symbol = matrix[Integer.parseInt(coveredArea.get(0).split(":")[0])][Integer.parseInt(coveredArea.get(0).split(":")[1])];
+                        reward += bettingAmount * config.getSymbols().get(symbol).getReward_multiplier() * winCombination.getReward_multiplier();
+                        appliedWinningCombinations.computeIfAbsent(symbol, k -> new ArrayList<>()).add(winEntry.getKey());
+                    }
+                }
             }
         }
     }
+
+    private boolean isWinningPattern(List<String> coveredArea) {
+        String firstSymbol = null;
+        for (String position : coveredArea) {
+            int row = Integer.parseInt(position.split(":")[0]);
+            int col = Integer.parseInt(position.split(":")[1]);
+            String currentSymbol = matrix[row][col];
+            if (firstSymbol == null) {
+                firstSymbol = currentSymbol;
+            } else if (!firstSymbol.equals(currentSymbol)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public Map<String, List<String>> getAppliedWinningCombinations() {
         return appliedWinningCombinations;

@@ -1,7 +1,7 @@
 
-G	java:S106"+Replace this use of System.out by a logger.(Ø»”Æ8ÄŽ„‚2
-L	java:S106"+Replace this use of System.out by a logger.(ÛÕýÆýÿÿÿÿ8ÄŽ„‚2
-L	java:S106 "+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿ8ÄŽ„‚2
-L	java:S106#"+Replace this use of System.out by a logger.(á¥Ìüÿÿÿÿ8ÄŽ„‚2
-G	java:S106$"+Replace this use of System.out by a logger.(¤ÂõÚ8ÄŽ„‚2
-G	java:S106%"+Replace this use of System.out by a logger.(ß¤ñ­8ÄŽ„‚2
+Q
+java:S1128"5Remove this unused import 'org.example.model.Symbol'.(¨ÀªT8ºšÙ¶‚2
+`
+java:S1128">Remove this unused import 'org.example.model.CellProbability'.(¸§Ð³úÿÿÿÿ8»šÙ¶‚2
+c
+java:S1128"ARemove this unused import 'org.example.model.WinningCombination'.(ò¨¬Ëûÿÿÿÿ8»šÙ¶‚2

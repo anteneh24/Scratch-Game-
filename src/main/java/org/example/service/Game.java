@@ -1,5 +1,7 @@
 package org.example.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.model.Configuration;
 import org.example.model.Symbol;
 import org.example.model.CellProbability;
@@ -16,24 +18,22 @@ public class Game {
         this.bettingAmount = bettingAmount;
     }
 
-    public void play() {
+    public String play() throws JsonProcessingException {
         MatrixGenerator generator = new MatrixGenerator(config);
         String[][] matrix = generator.generateMatrix();
 
         RewardCalculator calculator = new RewardCalculator(config, matrix, bettingAmount);
         int reward = calculator.calculateReward();
 
-        // Print the results
-        System.out.println("Matrix:");
-        for (String[] row : matrix) {
-            for (String cell : row) {
-                System.out.print(cell + " ");
-            }
-            System.out.println();
-        }
+        // Create a result object to hold the output
+        Map<String, Object> result = new HashMap<>();
+        result.put("matrix", matrix);
+        result.put("reward", reward);
+        result.put("appliedWinningCombinations", calculator.getAppliedWinningCombinations());
+        result.put("appliedBonusSymbol", calculator.getAppliedBonusSymbol());
 
-        System.out.println("Reward: " + reward);
-        System.out.println("Applied Winning Combinations: " + calculator.getAppliedWinningCombinations());
-        System.out.println("Applied Bonus Symbol: " + calculator.getAppliedBonusSymbol());
+        // Convert the result object to JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(result);
     }
 }

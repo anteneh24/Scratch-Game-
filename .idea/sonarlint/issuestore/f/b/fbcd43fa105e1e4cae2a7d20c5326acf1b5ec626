@@ -5,3 +5,5 @@ v
 java:S1104"YMake bonus_symbols a static final constant or non-public and provide accessors if needed.(¿–·é8á«Ùƒ‚2
 |	java:S116"[Rename this field "standard_symbols" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä˜—üÿÿÿÿ8ã«Ùƒ‚2
 t	java:S116"XRename this field "bonus_symbols" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿–·é8ã«Ùƒ‚2
+L
+java:S1128"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8ÿÃ‹¶‚2
