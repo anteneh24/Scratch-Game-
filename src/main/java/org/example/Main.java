@@ -11,7 +11,6 @@ public class Main {
 
     /**
      * Main entry point of the Scratch Game application.
-     *
      * @param args Command-line arguments. Expected format: --config <config-file> --betting-amount <amount>
      */
     public static void main(String[] args) {
